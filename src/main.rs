@@ -1,4 +1,4 @@
-use chrono::{DateTime, FixedOffset, Local, NaiveDateTime};
+use chrono::{DateTime, FixedOffset};
 use clap::Parser;
 use colored::Colorize;
 use git2::{BranchType, Repository, Time};
@@ -116,11 +116,10 @@ impl Record {
         forward + backward + 2
     }
 
-    fn chrono(&self) -> DateTime<Local> {
-        let naive = NaiveDateTime::from_timestamp_opt(self.time.seconds(), 0).unwrap();
-        DateTime::<Local>::from_local(
-            naive,
-            FixedOffset::west_opt(self.time.offset_minutes() * 60).unwrap(),
-        )
+    fn chrono(&self) -> DateTime<FixedOffset> {
+        let offset = FixedOffset::west_opt(self.time.offset_minutes() * 60).unwrap();
+        DateTime::from_timestamp(self.time.seconds(), 0)
+            .unwrap()
+            .with_timezone(&offset)
     }
 }
