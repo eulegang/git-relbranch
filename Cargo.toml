@@ -1,0 +1,25 @@
+[package]
+edition = "2021"
+name = "git-relbranch"
+version = "0.1.0"
+description = "Find the relative position between different branches"
+license = "MIT"
+
+[dependencies.atty]
+version = "0.2.14"
+
+[dependencies.chrono]
+version = "0.4.23"
+
+[dependencies.clap]
+version = "4.1.1"
+features = ["derive"]
+
+[dependencies.colored]
+version = "2.0.0"
+
+[dependencies.eyre]
+version = "0.6.8"
+
+[dependencies.git2]
+version = "0.16.0"
